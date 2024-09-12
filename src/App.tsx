@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './styles/index.css';
+import './i18n';
+
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from './Router';
+import { Layout } from './pages/Layout';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { MenuContext } from './utils/context';
 
 function App() {
+  const { t } = useTranslation();
+
+  // Contexte menu actif
+  const [activeMenu, setActiveMenu] = useState<string>('');
+
+  const menuContextValue = {
+    activeMenu,
+    updateActiveMenu: setActiveMenu,
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <MenuContext.Provider value={menuContextValue}>
+        <Layout>
+          <Router/>
+        </Layout>
+      </MenuContext.Provider>
+    </BrowserRouter>
   );
 }
 
