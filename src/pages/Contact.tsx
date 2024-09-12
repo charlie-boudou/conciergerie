@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ContactForm } from "../components/contact/ContactForm";
-import emailjs from 'emailjs-com';
 import { Button } from "../components/Button";
 
 

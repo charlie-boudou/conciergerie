@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 import emailjs from 'emailjs-com';
 import { Loader } from "../../assets/svgComponents";
+require('dotenv').config();
 
 interface IContactFormProps {
     setIsMessageSend: Dispatch<SetStateAction<boolean>>;
@@ -28,12 +29,17 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
     setIsLoading(true);
 
-    emailjs.send("service_r7qghmq","template_4ulre5g",{
-        to_name: "Bénedicte",
-        from_name: formData.name,
-        message: formData.message,
-        reply_to: formData.email,
-    }, 'dSyIX4iEGfCy9Wbq2')
+    emailjs.send(
+        process.env.REACT_APP_SERVICE || '',
+        process.env.REACT_APP_TEMPLATE || '',
+        {
+            to_name: "Bénedicte",
+            from_name: formData.name,
+            message: formData.message,
+            reply_to: formData.email,
+        },
+        process.env.REACT_APP_KEY || ''
+    )
     .then(() => {
         setIsMessageSend(true);
         setIsLoading(false);
