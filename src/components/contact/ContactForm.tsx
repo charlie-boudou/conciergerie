@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 import emailjs from 'emailjs-com';
 import { Loader } from "../../assets/svgComponents";
-require('dotenv').config();
 
 interface IContactFormProps {
     setIsMessageSend: Dispatch<SetStateAction<boolean>>;
